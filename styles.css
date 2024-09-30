@@ -13,8 +13,16 @@ body {
 }
 
 .result {
+    display: flex;
     border: 1px black solid;
     height: 100px;
+    align-items: center;
+    justify-content: end;
+}
+
+.text-content {
+    font-size: 70px;
+    flex-wrap: nowrap;
 }
 
 .first-row, .second-row, .third-row, .fourth-row, .fifth-row {

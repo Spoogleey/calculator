@@ -1,3 +1,4 @@
+const display = document.querySelector(".text-content");
 let number1;
 let number2;
 let operator;
@@ -37,4 +38,12 @@ function operate(num1, num2, oper) {
     return answer;
 }
 
-console.log(operate(4, 5, "/"));
+let numbers = document.querySelectorAll(".number");
+
+numbers.forEach((number) => {
+    number.onclick = () => displayNumbers(number.innerHTML);
+})
+
+function displayNumbers(number) {
+    display.textContent += number;
+}
