@@ -1,0 +1,47 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#calculator {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+}
+
+.result {
+    border: 1px black solid;
+    height: 100px;
+}
+
+.first-row, .second-row, .third-row, .fourth-row, .fifth-row {
+    display: flex;
+    flex: 1;
+}
+
+button {
+    flex: 1;
+    padding: 40px;
+    font-size: larger;
+    font-weight: bold;
+    border: 0.5px solid black;
+}
+
+.number {
+    background-color: orange;
+}
+
+.operator {
+    background-color: lightblue;
+}
+
+.equals {
+    background-color: lightgreen;
+}
+
+.blank {
+    background-color: black;
+}
