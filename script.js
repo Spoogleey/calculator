@@ -89,4 +89,9 @@ clear.onclick = () => {
     number2 = 0;
     operator = "";
     display.textContent = "";
-};
+}
+// When the back button is clicked
+const back = document.querySelector(".back");
+back.onclick = () => {
+    display.textContent = display.innerHTML.slice(0, -1);
+}
