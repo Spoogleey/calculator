@@ -101,7 +101,7 @@ const back = document.querySelector(".back");
 back.onclick = () => {
     display.textContent = display.innerHTML.slice(0, -1);
 }
-
+// Round the result based on how long it is
 function formatNumber(number) {
     const maxLength = 10;
     let negative = number < 0;
@@ -118,19 +118,25 @@ function formatNumber(number) {
             return (negative ? "-" : "") + integerPart;
         }
     } else {
-        // Subtract 1 for decimal point
-        decimalDigitsAllowed -= 1;
+        // We need to determine how many decimal places we can display
         let roundedNumber;
         let finalNumber;
-        while (decimalDigitsAllowed >= 0) {
-            roundedNumber = absNumber.toFixed(decimalDigitsAllowed);
-            integerPart = Math.floor(roundedNumber).toString();
-            digitsBeforeDecimal = integerPart.length;
+        let decimalPlaces = decimalDigitsAllowed - 1; // Subtract 1 for the decimal point
+
+        while (decimalPlaces >= 0) {
+            // Round the number to the current number of decimal places
+            roundedNumber = absNumber.toFixed(decimalPlaces);
             finalNumber = (negative ? "-" : "") + roundedNumber;
+
+            // If the number is an integer after rounding, remove the decimal point
+            if (Number.isInteger(Number(roundedNumber))) {
+                finalNumber = (negative ? "-" : "") + Math.round(absNumber).toString();
+            }
+
             if (finalNumber.length <= maxLength) {
                 return finalNumber;
             }
-            decimalDigitsAllowed -= 1;
+            decimalPlaces -= 1;
         }
         // If unable to format appropriately
         return "Too big";
