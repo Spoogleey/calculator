@@ -26,7 +26,7 @@ function operate(num1, num2, oper) {
     }
     return answer;
 }
-
+// Display the numbers on the calculator when they are clicked
 let numbers = document.querySelectorAll(".number");
 numbers.forEach((number) => {
     number.onclick = () => {
@@ -45,6 +45,15 @@ function displayNumbers(number) {
 let maths = document.querySelectorAll(".operator");
 maths.forEach((op) => {
     op.onclick = () => {
+        if(operator !== "") {
+            if(display.innerHTML === "0" && operator === "/") {
+                display.textContent = "Really?";
+            } else {
+                number2 = Number(display.innerHTML);
+                display.textContent = operate(number1, number2, operator);
+                operator = op.innerHTML;
+            }
+        }
         operator = op.innerHTML;
         number1 = Number(display.innerHTML);
         resetDisplay = true;
@@ -53,8 +62,14 @@ maths.forEach((op) => {
 // When the equals button is clicked
 const equals = document.querySelector(".equals");
 equals.onclick = () => {
-    number2 = Number(display.innerHTML);
-    display.textContent = operate(number1, number2, operator);
+    if(display.innerHTML === "0" && operator === "/") {
+        display.innerHTML = "Really?";
+    } else {
+        number2 = Number(display.innerHTML);
+        display.textContent = operate(number1, number2, operator);
+        operator = "";
+        resetDisplay = true;
+    }
 }
 // When the clear button is clicked
 const clear = document.querySelector(".clear");
