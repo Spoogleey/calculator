@@ -71,6 +71,17 @@ equals.onclick = () => {
         resetDisplay = true;
     }
 }
+//When the decimal button is clicked
+const decimal = document.querySelector(".decimal");
+decimal.onclick = () => {
+    if(display.innerHTML.includes(".")) {
+        return;
+    } else if(display.innerHTML === "") {
+        display.textContent = "0.";
+    } else {
+        display.textContent += ".";
+    }
+}
 // When the clear button is clicked
 const clear = document.querySelector(".clear");
 clear.onclick = () => {

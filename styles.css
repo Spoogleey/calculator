@@ -32,7 +32,7 @@ body {
 
 button {
     flex: 1;
-    padding: 40px;
+    padding: 30px;
     font-size: larger;
     font-weight: bold;
     border: 0.5px solid black;
@@ -42,7 +42,7 @@ button {
     background-color: orange;
 }
 
-.operator {
+.operator, .decimal {
     background-color: lightblue;
 }
 
