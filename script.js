@@ -39,7 +39,11 @@ function displayNumbers(number) {
     if(resetDisplay) {
         display.textContent = "";
     }
-    display.textContent += number;
+    if(display.innerHTML.length === 10) {
+        return;
+    } else {
+        display.textContent += number;
+    }
 }
 // When an operator button is clicked
 let maths = document.querySelectorAll(".operator");
