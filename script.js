@@ -54,7 +54,8 @@ maths.forEach((op) => {
                 display.textContent = "Really?";
             } else {
                 number2 = Number(display.innerHTML);
-                display.textContent = operate(number1, number2, operator);
+                let result = operate(number1, number2, operator);
+                display.textContent = formatNumber(result);
                 operator = op.innerHTML;
             }
         }
@@ -70,7 +71,8 @@ equals.onclick = () => {
         display.innerHTML = "Really?";
     } else {
         number2 = Number(display.innerHTML);
-        display.textContent = operate(number1, number2, operator);
+        let result = operate(number1, number2, operator);
+        display.textContent = formatNumber(result);
         operator = "";
         resetDisplay = true;
     }
@@ -98,4 +100,39 @@ clear.onclick = () => {
 const back = document.querySelector(".back");
 back.onclick = () => {
     display.textContent = display.innerHTML.slice(0, -1);
+}
+
+function formatNumber(number) {
+    const maxLength = 10;
+    let negative = number < 0;
+    let absNumber = Math.abs(number);
+    let integerPart = Math.floor(absNumber).toString();
+    let digitsBeforeDecimal = integerPart.length;
+    let decimalDigitsAllowed = maxLength - digitsBeforeDecimal - (negative ? 1 : 0);
+
+    if (decimalDigitsAllowed <= 0) {
+        // No room for decimal point or decimal digits
+        if (digitsBeforeDecimal > maxLength - (negative ? 1 : 0)) {
+            return "Too big";
+        } else {
+            return (negative ? "-" : "") + integerPart;
+        }
+    } else {
+        // Subtract 1 for decimal point
+        decimalDigitsAllowed -= 1;
+        let roundedNumber;
+        let finalNumber;
+        while (decimalDigitsAllowed >= 0) {
+            roundedNumber = absNumber.toFixed(decimalDigitsAllowed);
+            integerPart = Math.floor(roundedNumber).toString();
+            digitsBeforeDecimal = integerPart.length;
+            finalNumber = (negative ? "-" : "") + roundedNumber;
+            if (finalNumber.length <= maxLength) {
+                return finalNumber;
+            }
+            decimalDigitsAllowed -= 1;
+        }
+        // If unable to format appropriately
+        return "Too big";
+    }
 }
